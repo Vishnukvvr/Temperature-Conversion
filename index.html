@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Conversion</title>
+    <style>
+      body {
+            background-image: url("nature.jpg");
+            background-size: cover; 
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+        .temp{
+            background-color: white;
+            border: 2px solid rgba(0, 0, 0, 0.26);
+            width: 30%;
+            margin: auto;
+            margin-top: 15%;
+            border-radius: 10px;
+            box-shadow: 5px 10px hsla(0, 0%, 0%, 0.196);
+        }
+        #number{
+            margin:  5% 5% 5% 35%;
+            border: 2px solid rgba(162, 70, 70, 0.473);
+            width: 20%;
+            height: 40px;
+            font-size: 2em;
+            border-radius: 5px;
+            text-align: center;
+        }
+        h1{
+            text-align: center;
+            color: hsl(180, 74%, 49%);
+        }
+        #tofahrenheit{
+            margin-left: 35%;
+        }
+        #tocelsius{
+            margin-left: 35%;
+        }
+        #submit{
+            margin: 5% 35%;
+            border-radius: 5px;
+            border: 2px solid hsla(0, 0%, 0%, 0.56);
+            font-size: 1.5em;
+            background-color: rgb(152, 205, 221);
+        }
+        #submit:hover{
+            background-color: rgb(10, 202, 241);
+        }
+        #results{
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        @media (max-width: 480px) {
+            .temp{
+                width: 100%;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="temp">
+      <h1>Temperature Conversion</h1>
+      <input type="number" id="number"><br>
+      <input type="radio" id="tofahrenheit" name="vishnu">
+      <label for="tofahrenheit">Fahrenheit ➡️ Celsius</label><br>
+      <input type="radio" id="tocelsius" name="vishnu">
+      <label for="tocelsius">Celsius ➡️ Fahrenheit</label><br>
+      <button id="submit" onclick="convert()">Submit</button><br>
+      <p id="results">Enjoy pandugoo</p>
+      <img id="tempImage" src="" alt="" style="display: none;">
+    </div>
+
+    <script>
+   function convert() {
+    const textbox = document.getElementById("number");
+    const tofahrenheit = document.getElementById("tofahrenheit");
+    const tocelsius = document.getElementById("tocelsius");
+    const results = document.getElementById("results");
+
+    let temp= parseFloat(textbox.value);
+    let celsiusTemp;
+    if (tofahrenheit.checked) {
+        celsiusTemp = (temp - 32) * 5 / 9;
+        results.textContent = `${celsiusTemp.toFixed(2)}°C`;
+    } else if (tocelsius.checked) {
+        celsiusTemp = temp;
+        let fahrenheitTemp = (temp * 9 / 5) + 32;
+        results.textContent = `${fahrenheitTemp.toFixed(2)}°F`;
+    } else {
+        results.textContent = "Please select a conversion unit.";
+        document.body.style.backgroundImage = "url('nature.jpg')"; 
+        return;
+    }
+    if (celsiusTemp < 15) {
+        document.body.style.backgroundImage = "url('cold.jpg')";
+    } else if (celsiusTemp >= 15 && celsiusTemp <= 30) {
+        document.body.style.backgroundImage = "url('moderate.jpeg')";
+    } else {
+        document.body.style.backgroundImage = "url('sun.jpg')"; 
+    }
+}
+
+    </script>
+</body>
+</html>
